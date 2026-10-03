@@ -1,38 +1,56 @@
-export const CATEGORIES = ['Invoice', 'Report', 'Contract', 'Other'] as const
+import type { PAPER_TYPES } from '@/lib/constants'
 
-export type Category = (typeof CATEGORIES)[number]
+export type PaperType = (typeof PAPER_TYPES)[number]['value']
 
-export interface PdfFile {
+export interface StudyFile {
   id: string
-  filename: string
   title: string
-  category: string
+  subject: string
+  gradeLevel: string
+  paperType: PaperType
+  year: number | null
+  term: string | null
   description: string | null
-  size_bytes: number
-  content_type: string
-  uploaded_at: string
+  filename: string
+  sizeBytes: number
+  contentType: string
+  uploadedAt: string
+}
+
+export interface SubjectCount {
+  name: string
+  count: number
+}
+
+export interface FilesQuery {
+  page: number
+  pageSize: number
+  search: string
+  subject: string
+  gradeLevel: string
+  paperType: PaperType | ''
 }
 
 export interface FilesPage {
-  files: PdfFile[]
-  nextCursor: string | null
+  files: StudyFile[]
+  total: number
+  page: number
+  pageSize: number
+  totalPages: number
 }
 
-export interface UploadUrlResponse {
-  key: string
-  uploadUrl: string
-}
+export type FileCounts = Record<'all' | PaperType, number>
 
-export interface CreateFileRequest {
+export interface CreateFileInput {
   key: string
   filename: string
   size: number
   contentType: string
   title: string
-  category: string
+  subject: string
+  gradeLevel: string
+  paperType: PaperType
+  year: number
+  term?: string
   description?: string
-}
-
-export interface DownloadUrlResponse {
-  downloadUrl: string
 }

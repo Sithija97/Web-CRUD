@@ -2,9 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDF Library</title>
+    <title>Study Materials</title>
+      <script>
+      // Apply the saved theme before first paint (mirrors src/lib/theme.ts).
+      try {
+        var t = localStorage.getItem('theme')
+        var dark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', dark)
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

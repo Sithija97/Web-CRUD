@@ -1,0 +1,28 @@
+name = "study-materials-api"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+workers_dev = true
+preview_urls = false
+
+[vars]
+# Comma-separated list of frontend origins allowed by CORS (add your deployed URL).
+ALLOWED_ORIGINS = "http://localhost:5173"
+# Your Cloudflare account ID (dashboard sidebar, or `wrangler whoami`). Not secret.
+R2_ACCOUNT_ID = "a468edbe77f760ea11e011240378cd97"
+R2_BUCKET_NAME = "study-materials"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "study-materials-db"
+# Paste the id printed by `wrangler d1 create study-materials-db`.
+database_id = "c140d977-e681-41f8-841f-79f8f8942819"
+
+# Used only to verify uploads landed; signing uses the S3-compatible API + secrets below.
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "study-materials"
+
+# Secrets (never in this file):
+#   wrangler secret put R2_ACCESS_KEY_ID
+#   wrangler secret put R2_SECRET_ACCESS_KEY
+# For `wrangler dev`, put the same two keys in worker/.dev.vars (see .dev.vars.example).
